@@ -34,7 +34,8 @@ toponym_longitude, toponym_lattitude, delta = choose_size(json_response)
 map_params = {
     "ll": ",".join([toponym_longitude, toponym_lattitude]),
     "spn": ",".join([delta, delta]),
-    "l": "map"
+    "l": "map",
+    "pt": f"{toponym_longitude},{toponym_lattitude},comma"
 }
 
 map_api_server = "http://static-maps.yandex.ru/1.x/"
