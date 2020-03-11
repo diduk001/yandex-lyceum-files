@@ -84,7 +84,7 @@ CONST_METERS_IN_DEGREE = float(pow(10, 5)) * 0.5
 # Формирование сниппета
 snippet = [org_name, org_address, org_hours, int(CONST_METERS_IN_DEGREE * distance)]
 snippet = list(map(str, snippet))
-snippet[3] += " метров"
+snippet[3] += " м"
 
 # Печать сниппетов1
 print('\n'.join(snippet))
