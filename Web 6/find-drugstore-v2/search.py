@@ -1,6 +1,6 @@
 import sys
 from io import BytesIO
-from pprint import *
+from math import sqrt
 
 import requests
 from PIL import Image
@@ -26,7 +26,9 @@ if not response_toponym:
 # Преобразуем ответ в json-объект
 json_response_toponym = response_toponym.json()
 
-toponym_longitude, toponym_lattitude, toponym_delta = choose_size_geocoder(json_response_toponym)
+toponym_longitude, toponym_lattitude, toponym_delta = map(float,
+                                                          choose_size_geocoder(
+                                                              json_response_toponym))
 
 search_api_server = "https://search-maps.yandex.ru/v1/"
 api_key = "dda3ddba-c9ea-4ead-9010-f43fbc15c6e3"
@@ -55,15 +57,15 @@ organization = json_response["features"][0]
 org_name = organization["properties"]["CompanyMetaData"]["name"]
 # Адрес организации.
 org_address = organization["properties"]["CompanyMetaData"]["address"]
-
-pprint(organization)
+# Часы работы
+org_hours = organization["properties"]["CompanyMetaData"]["Hours"]["text"]
 
 # Получаем координаты ответа.
-point_longitude, point_lattitude, point_delta = choose_size_search_api(organization)
-org_point = f"{point_longitude},{point_lattitude}"
+org_longitude, org_lattitude, org_delta = choose_size_search_api(organization)
+org_coords = f"{org_longitude},{org_lattitude}"
 
-delta = str(2 * max(abs(point_longitude - float(toponym_longitude)), abs(point_lattitude -
-                                                                         float(toponym_lattitude))))
+delta = str(2 * max(abs(org_longitude - float(toponym_longitude)), abs(org_lattitude -
+                                                                       float(toponym_lattitude))))
 
 # Собираем параметры для запроса к StaticMapsAPI:
 map_params = {
@@ -72,11 +74,22 @@ map_params = {
     "spn": ",".join([delta, delta]),
     "l": "map",
     # добавим точку, чтобы указать найденную аптеку
-    "pt": '~'.join([f"{org_point},pm2dgl", f"{toponym_longitude},{toponym_lattitude},org"])
+    "pt": '~'.join([f"{org_coords},pm2dgl", f"{toponym_longitude},{toponym_lattitude},org"])
 }
 
+distance = sqrt((toponym_longitude - org_longitude) ** 2 + (toponym_lattitude - org_lattitude)
+                ** 2)
+CONST_METERS_IN_DEGREE = float(pow(10, 5)) * 0.5
+
+# Формирование сниппета
+snippet = [org_name, org_address, org_hours, int(CONST_METERS_IN_DEGREE * distance)]
+snippet = list(map(str, snippet))
+snippet[3] += " метров"
+
+# Печать сниппетов1
+print('\n'.join(snippet))
+
 map_api_server = "http://static-maps.yandex.ru/1.x/"
-# ... и выполняем запрос
 response = requests.get(map_api_server, params=map_params)
 
 Image.open(BytesIO(response.content)).show()
