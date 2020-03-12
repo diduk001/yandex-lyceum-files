@@ -1,6 +1,5 @@
 import sys
 from io import BytesIO
-from math import sqrt
 
 import requests
 from PIL import Image
@@ -26,7 +25,7 @@ if not response_toponym:
 # Преобразуем ответ в json-объект
 json_response_toponym = response_toponym.json()
 
-toponym_longitude, toponym_lattitude, toponym_delta = map(float,
+toponym_longitude, toponym_lattitude, delta = map(float,
                                                           choose_size_geocoder(
                                                               json_response_toponym))
 
@@ -37,9 +36,9 @@ address_ll = f"{toponym_longitude},{toponym_lattitude}"
 
 search_params = {
     "ll": address_ll,
-    # "spn": "1,1",
     "text": "аптека",
     "type": "biz",
+    # "results": str(10),     # Кол-во результатов в ответе
     "apikey": api_key,
     "lang": "ru_RU"
 }
@@ -51,59 +50,46 @@ if not response:
     exit(-1)
 
 json_response = response.json()
-points = [address_ll + ",comma"]
 
-
-for i in range(len(json_response["features"])):
-    # Получаем первую найденную организацию.
-    organization = json_response["features"][i]
+# Получаем организации
+organizations = json_response["features"]
+points = list()
+for organization in organizations:
     # Название организации.
     org_name = organization["properties"]["CompanyMetaData"]["name"]
     # Адрес организации.
     org_address = organization["properties"]["CompanyMetaData"]["address"]
     # Часы работы
-    org_hours = organization["properties"]["CompanyMetaData"]["Hours"]["text"]
-
-    # Получаем координаты ответа.
+    org_hours = organization["properties"]["CompanyMetaData"]["Hours"]
+    # Координаты
     org_longitude, org_lattitude, org_delta = choose_size_search_api(organization)
-    org_coords = "{},{},pmwts{}".format(org_longitude, org_lattitude, i + 1)
-    print(org_coords)
-    points.append(org_coords)
 
-# Получаем первую найденную организацию.
-organization = json_response["features"][0]
-org_longitude, org_lattitude, org_delta = choose_size_search_api(organization)
+    try:
+        twenty_four_hours_avaliable = org_hours["Availabilities"][0]["TwentyFourHours"]
+        if twenty_four_hours_avaliable:
+            point = f"{org_longitude},{org_lattitude},pm2gnm"
+    except Exception:
+        try:
+            intervals = org_hours["Availabilities"][0]["Intervals"]
+            point = f"{org_longitude},{org_lattitude},pm2blm"
+        except Exception:
+            point = f"{org_longitude},{org_lattitude},pm2grm"
 
-delta = str(2 * max(abs(org_longitude - float(toponym_longitude)), abs(org_lattitude -
-                                                                       float(toponym_lattitude))))
+    points.append(point)
+
+delta = 0.05
 
 # Собираем параметры для запроса к StaticMapsAPI:
 map_params = {
     # позиционируем карту центром на наш исходный адрес
     "ll": f"{toponym_longitude},{toponym_lattitude}",
-    "spn": ",".join([delta, delta]),
+    "spn": ",".join([str(delta), str(delta)]),
     "l": "map",
-    # добавим точку, чтобы указать найденную аптеку
+    # добавим точки, чтобы указать найденную аптеку
     "pt": '~'.join(points)
 }
-
-distance = sqrt((toponym_longitude - org_longitude) ** 2 + (toponym_lattitude - org_lattitude)
-                ** 2)
-CONST_METERS_IN_DEGREE = float(pow(10, 5)) * 0.5
-
-# Формирование сниппета
-snippet = [org_name, org_address, org_hours, int(CONST_METERS_IN_DEGREE * distance)]
-snippet = list(map(str, snippet))
-snippet[3] += " м"
-
-# Печать сниппетов1
-print('\n'.join(snippet))
 
 map_api_server = "http://static-maps.yandex.ru/1.x/"
 response = requests.get(map_api_server, params=map_params)
 
-if response:
-    Image.open(BytesIO(response.content)).show()
-else:
-    print("code:", response.status_code)
-    print(response.content)
+Image.open(BytesIO(response.content)).show()
