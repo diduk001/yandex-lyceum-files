@@ -34,7 +34,7 @@ toponym_longitude, toponym_lattitude, delta = choose_size(json_response)
 map_params = {
     "ll": ",".join([toponym_longitude, toponym_lattitude]),
     "spn": ",".join([delta, delta]),
-    "l": "map",
+    "l": "sat",
     "pt": f"{toponym_longitude},{toponym_lattitude},comma"
 }
 
