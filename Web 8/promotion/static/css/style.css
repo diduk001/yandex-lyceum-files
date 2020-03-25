@@ -1,0 +1,22 @@
+h1 {
+    font-family: Consolas, monaco, monospace;
+    font-size: 36px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    color: chartreuse;
+    text-align: center;
+}
+
+
+p {
+    font-family: Consolas, 'Consolas', 'Monaco', 'Bitstream Vera Sans Mono', monospace;
+    font-size: 18px;
+    font-style: normal;
+    color: mediumseagreen;
+    text-align: center;
+}
+
+body {
+    background: #08170b;
+}
