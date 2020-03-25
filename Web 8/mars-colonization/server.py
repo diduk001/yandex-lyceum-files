@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask
 
 app = Flask(__name__)
 
@@ -9,7 +9,6 @@ def mission_name():
                     <html lang="ru">
                       <head>
                         <meta charset="utf-8">
-                        <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
                         <title>Колонизация Марса</title>
                       </head>
                       <body>
@@ -24,7 +23,6 @@ def mission_slogan():
                     <html lang="ru">
                       <head>
                         <meta charset="utf-8">
-                        <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
                         <title>Колонизаця Марса</title>
                       </head>
                       <body>

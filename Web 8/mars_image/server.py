@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask
 
 app = Flask(__name__)
 
@@ -9,7 +9,6 @@ def mission_name():
                     <html lang="ru">
                       <head>
                         <meta charset="utf-8">
-                        <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
                         <title>Колонизация Марса</title>
                       </head>
                       <body>
@@ -24,7 +23,6 @@ def mission_slogan():
                     <html lang="ru">
                       <head>
                         <meta charset="utf-8">
-                        <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
                         <title>Колонизаця Марса</title>
                       </head>
                       <body>
@@ -39,7 +37,6 @@ def promotion():
                     <html lang="ru">
                       <head>
                         <meta charset="utf-8">
-                        <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
                         <title>Колонизаця Марса</title>
                       </head>
                       <body>
@@ -60,15 +57,13 @@ def image_mars():
                         <html lang="ru">
                           <head>
                             <meta charset="utf-8">
-                            <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
                             <title>Привет, Марс!</title>
                           </head>
                           <body>
                             <h1>Жди нас, Марс!</h1>
-                            <figure class="sign">
-                            <p><img src= {url_for("static", filename="image/mars_img.jpg")}  
+                            <p><img src=https://astroson.com/wp-content/uploads/2017/03/Mars.png  
                             alt="Изображение Марса"></p>
-                            <figcaption><p>Вот она, какая, Красная Планета</p></figcaption>
+                            <p>Вот она, какая, Красная Планета</p>
                           </body>
                         </html>"""
 

@@ -9,7 +9,6 @@ def mission_name():
                     <html lang="ru">
                       <head>
                         <meta charset="utf-8">
-                        <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
                         <title>Колонизация Марса</title>
                       </head>
                       <body>
@@ -24,7 +23,6 @@ def mission_slogan():
                     <html lang="ru">
                       <head>
                         <meta charset="utf-8">
-                        <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
                         <title>Колонизаця Марса</title>
                       </head>
                       <body>
@@ -39,12 +37,10 @@ def promotion():
                     <html lang="ru">
                       <head>
                         <meta charset="utf-8">
-                        <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
                         <title>Колонизаця Марса</title>
                       </head>
                       <body>
                         <h1>Рекламная комания</h1>
-                        <br></br>
                         <p>Человечество вырастает из детства.</p>
                         <p>Человечеству мала одна планета.</p>
                         <p>Мы сделаем обитаемыми безжизненные пока планеты.</p>
