@@ -208,5 +208,38 @@ def astronaut_selection():
         return mission_name()
 
 
+@app.route("/choice/<planet_name>")
+def choice(planet_name):
+    return f"""<!doctype html>
+                            <html lang="ru">
+                              <head>
+                                <meta charset="utf-8">                            
+                                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+                                <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />                    
+                                <title>Колонизация</title>
+                              </head>
+                              <body>
+                                <h1>Моё предложение: {planet_name}</h1>
+                                <h2>Это крутая планета</h2>
+                                <div class="alert alert-primary" role="alert">
+                                  <h4>На ней много необходимых ресурсов</h4>
+                                </div>
+                                <div class="alert alert-secondary" role="alert">
+                                  <h4>На ней есть вода и атмосфера</h4>
+                                </div>
+                                <div class="alert alert-success" role="alert">
+                                  <h4>Не ней есть магнитное поле, хоть и небольшое</h4>
+                                </div>
+                                <div class="alert alert-danger" role="alert">
+                                  <h4>Наконец, она просто красивая!</h4>
+                                </div>
+                                <div class="alert alert-warning" role="alert">
+                                  <h4>Присоединяйся!</h4>
+                                </div>
+
+                              </body>
+                            </html>"""
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
