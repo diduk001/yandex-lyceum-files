@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def mission_name():
-    return """<!doctype html>
+    return f"""<!doctype html>
                     <html lang="ru">
                       <head>
                         <meta charset="utf-8">                            
@@ -21,7 +21,7 @@ def mission_name():
 
 @app.route("/index")
 def mission_slogan():
-    return """<!doctype html>
+    return f"""<!doctype html>
                     <html lang="ru">
                       <head>
                         <meta charset="utf-8">                            
@@ -37,7 +37,7 @@ def mission_slogan():
 
 @app.route("/promotion")
 def promotion():
-    return """<!doctype html>
+    return f"""<!doctype html>
                     <html lang="ru">
                       <head>
                         <meta charset="utf-8">                            
@@ -59,7 +59,7 @@ def promotion():
 
 @app.route("/image_mars")
 def image_mars():
-    return """"<!doctype html>
+    return f"""<!doctype html>
                         <html lang="ru">
                           <head>
                             <meta charset="utf-8">                            
@@ -94,20 +94,21 @@ def promotion_image():
                               <h4>Человечество вырастает из детства</h4>
                             </div>
                             <div class="alert alert-secondary" role="alert">
-                              <h4>Человечество вырастает из детства</h4>
+                              <h4>Человечеству мала одна планета.</h4>
                             </div>
                             <div class="alert alert-success" role="alert">
-                              <h4>Человечество вырастает из детства</h4>
+                              <h4>Мы сделаем обитаемыми безжизненные пока планеты.</h4>
                             </div>
                             <div class="alert alert-danger" role="alert">
-                              <h4>Человечество вырастает из детства</h4>
+                              <h4>И начнем с Марса!</h4>
                             </div>
                             <div class="alert alert-warning" role="alert">
-                              <h4>Человечество вырастает из детства</h4>
+                              <h4>Присоединяйся!</h4>
                             </div>
                             
                           </body>
                         </html>"""
+
 
 
 if __name__ == '__main__':
