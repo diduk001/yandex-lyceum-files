@@ -1,0 +1,40 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background: darkslategrey;
+}
+
+h1 {
+    text-align: center;
+    font-family: monospace;
+    color: crimson;
+}
+
+h2 {
+    text-align: center;
+    font-family: monospace;
+    color: crimson;
+}
+
+h3 {
+    font-family: monospace;
+    color: crimson;
+}
+
+p {
+    text-align: center;
+    font-family: monospace;
+    color: lightgreen;
+    font-size: 150%;
+}
+
+form.login_form {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 450px;
+    background-color: chartreuse;
+    border: 5px darkslateblue;
+    border-radius: 5px;
+    padding: 10px;
+}
