@@ -1,0 +1,20 @@
+h2 {
+    text-align: center;
+}
+
+img {
+    height: 400px;
+    width: 600px;
+}
+
+.image {
+    padding: 25px;
+    border: solid 2px crimson;
+    text-align: center;
+}
+
+.list {
+    text-align: left;
+    font-size: 135%;
+    font-weight: bold;
+}
