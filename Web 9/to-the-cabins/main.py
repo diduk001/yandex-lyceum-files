@@ -61,7 +61,6 @@ def login():
 def distribution():
     params = dict()
     params["title"] = "Размещение"
-    params["astronaut_list"] = ["Ридли Скот", "Энди Уир"]
     return render_template("distribution.html", **params)
 
 
