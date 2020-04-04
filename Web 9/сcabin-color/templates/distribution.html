@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Анкета</h2>
+<div class="list">
+    {% for astronaut in astronaut_list %}
+    <p>{{ astronaut }} - Каюта № {{ loop.index }} {% if loop.first %} - капиитан коробля {%
+        endif %}</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

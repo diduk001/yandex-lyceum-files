@@ -1,0 +1,33 @@
+h2 {
+    text-align: center;
+}
+
+h4 {
+    color: black;
+    padding-left: 20px;
+}
+
+img {
+    max-height: 400px;
+    max-width: 600px;
+}
+
+.image {
+    padding: 25px;
+    border: solid 2px crimson;
+    text-align: center;
+}
+
+.list {
+    text-align: left;
+    font-size: 135%;
+    font-weight: bold;
+}
+
+.navbar-brand {
+    font-size: 35px;
+}
+
+table {
+    border: black 2px;
+}
